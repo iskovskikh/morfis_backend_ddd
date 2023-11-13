@@ -6,7 +6,7 @@ from common.domain.models.value_object import GenericUUID
 EntityIdType = TypeVar("EntityIdType", bound=GenericUUID)
 
 
-@dataclass
+@dataclass(kw_only=True)
 class Entity(Generic[EntityIdType]):
     @classmethod
     def next_id(cls) -> EntityIdType:
@@ -16,4 +16,4 @@ class Entity(Generic[EntityIdType]):
 @dataclass(kw_only=True)
 class AggregateRoot(Entity[EntityIdType]):
     # events: list = field(default_factory=list)
-    ...
+    pass

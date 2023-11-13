@@ -1,13 +1,23 @@
-from dataclasses import dataclass, InitVar
-from enum import IntEnum
+from dataclasses import dataclass, InitVar, field
+from enum import Enum
 
 from common.domain.models.entity import AggregateRoot
 from common.domain.models.value_object import EntityId
 
 
-class Status(IntEnum):
-    INACTIVE = 0, 'Неактивен'
-    ACTIVE = 1, 'Активен'
+class MyIntEnum(Enum):
+
+    @classmethod
+    def choices(cls):
+        result = [(status.value[0], status.value[1]) for status in cls]
+        return result
+
+
+# class Status(models.IntegerChoices):
+# class Status(IntEnum):
+class Status(MyIntEnum):
+    INACTIVE = (0, 'Неактивен')
+    ACTIVE = (1, 'Активен')
 
 
 class ExampleId(EntityId):
@@ -19,9 +29,11 @@ class Example(AggregateRoot):
     id: ExampleId
     title: str
     status: InitVar[Status]
+    _status: Status = field(init=False)
     is_hidden: bool = None
 
     def __post_init__(self, status: Status):
+        print('post_init')
         # super(Example, self).__post_init__()
         self._status = status
 
@@ -30,7 +42,6 @@ class Example(AggregateRoot):
             id_: ExampleId,
             title: str,
     ) -> 'Example':
-
         example_entity = Example(
             id=id_,
             title=title,
@@ -63,4 +74,4 @@ class Example(AggregateRoot):
         self.allow_for_show_check()
 
     def allow_for_show_check(self):
-        self.is_hidden = (self._title == '') or self._status != Status.ACTIVE
+        self.is_hidden = (self._title == '') # or self._status != Status.ACTIVE

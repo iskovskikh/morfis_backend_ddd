@@ -11,7 +11,7 @@ class BaseModel(models.Model):
     #     verbose_name='uuid'
     # )
 
-    id = models.IntegerField()
+    id = models.IntegerField(primary_key=True)
 
     created_at = models.DateTimeField(db_index=True, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -28,7 +28,7 @@ class ExampleModel(BaseModel):
     )
 
     status = models.IntegerField(
-        choices=Status.choices,
+        choices=Status.choices(),
         verbose_name='Статус'
     )
 
