@@ -5,19 +5,28 @@ from common.domain.models.entity import AggregateRoot
 from common.domain.models.value_object import EntityId
 
 
-class MyIntEnum(Enum):
+# class MyIntEnum(Enum):
+#
+#     @classmethod
+#     def choices(cls):
+#         result = [(status.value[0], status.value[1]) for status in cls]
+#         return result
+
+
+# class Status(models.IntegerChoices):
+# class Status(IntEnum):
+# class Status(MyIntEnum):
+#     INACTIVE = (0, 'Неактивен')
+#     ACTIVE = (1, 'Активен')
+
+class Status(Enum):
+    INACTIVE = ('INACTIVE', 'Неактивен')
+    ACTIVE = ('ACTIVE', 'Активен')
 
     @classmethod
     def choices(cls):
         result = [(status.value[0], status.value[1]) for status in cls]
         return result
-
-
-# class Status(models.IntegerChoices):
-# class Status(IntEnum):
-class Status(MyIntEnum):
-    INACTIVE = (0, 'Неактивен')
-    ACTIVE = (1, 'Активен')
 
 
 class ExampleId(EntityId):
@@ -29,7 +38,7 @@ class Example(AggregateRoot):
     id: ExampleId
     title: str
     status: InitVar[Status]
-    _status: Status = field(init=False)
+    # _status: Status = field(init=False)
     is_hidden: bool = None
 
     def __post_init__(self, status: Status):
@@ -74,4 +83,4 @@ class Example(AggregateRoot):
         self.allow_for_show_check()
 
     def allow_for_show_check(self):
-        self.is_hidden = (self._title == '') # or self._status != Status.ACTIVE
+        self.is_hidden = (self._title == '')  # or self._status != Status.ACTIVE

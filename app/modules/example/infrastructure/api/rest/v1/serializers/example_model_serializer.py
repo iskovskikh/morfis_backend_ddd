@@ -1,9 +1,11 @@
+from rest_framework.serializers import SerializerMethodField, ReadOnlyField
+
 from common.infarastructure.api.rest.serializers.rest_framework.model_serializer import ModelSerializer
 from modules.example.infrastructure.persistence.models.example_model import ExampleModel
-from rest_framework.serializers import SerializerMethodField
 
 
 class ExampleModelSerializer(ModelSerializer):
+    id = ReadOnlyField()
     formatted_title = SerializerMethodField()
 
     class Meta:
@@ -12,6 +14,8 @@ class ExampleModelSerializer(ModelSerializer):
             'id',
             'title',
             'formatted_title',
+            'status',
+            'is_hidden',
         ]
 
     def get_formatted_title(self, instance):

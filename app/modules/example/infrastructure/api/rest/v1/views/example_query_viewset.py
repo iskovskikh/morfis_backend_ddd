@@ -1,9 +1,9 @@
 from django_filters.rest_framework.backends import DjangoFilterBackend
 from rest_framework.pagination import PageNumberPagination
 
-from app.common.infarastructure.api.rest.views.rest_framewoork.query_model_viewset import QueryModelViewSet
-from app.modules.example.infrastructure.persistence.models.example_model import ExampleModel
-from app.modules.example.infrastructure.api.rest.v1.serializers.example_model_serializer import ExampleModelSerializer
+from common.infarastructure.api.rest.views.rest_framewoork.query_model_viewset import QueryModelViewSet
+from modules.example.infrastructure.persistence.models.example_model import ExampleModel
+from modules.example.infrastructure.api.rest.v1.serializers.example_model_serializer import ExampleModelSerializer
 
 
 class ExampleQueryPagination(PageNumberPagination):

@@ -11,7 +11,7 @@ class BaseModel(models.Model):
     #     verbose_name='uuid'
     # )
 
-    id = models.IntegerField(primary_key=True)
+    id = models.UUIDField(primary_key=True)
 
     created_at = models.DateTimeField(db_index=True, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -27,7 +27,8 @@ class ExampleModel(BaseModel):
         verbose_name='Название'
     )
 
-    status = models.IntegerField(
+    status = models.CharField(
+        max_length=32,
         choices=Status.choices(),
         verbose_name='Статус'
     )
@@ -47,13 +48,14 @@ class ExampleModel(BaseModel):
     @staticmethod
     def from_domain(example: Example) -> 'ExampleModel':
         return ExampleModel(
-            id=int(example.id),
+            id=example.id,
             title=example.title,
-            status=example.status
+            status=example.status,
+            is_hidden=example.is_hidden
         )
 
     def formatted_title(self):
-        return self.title.Capitalize()
+        return self.title.capitalize()
 
     def __str__(self):
         return self.title

@@ -19,7 +19,14 @@ from django.urls import path, include
 
 from modules.example.infrastructure.api.rest.v1.urls import urlpatterns as example_urls
 
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(example_urls))
+    path('', include(example_urls)),
+
+    path('api/v2/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/v2/docs/swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/v2/docs/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]
