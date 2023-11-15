@@ -1,7 +1,5 @@
-from dataclasses import dataclass
-
 from common.application.services.command.command import Command
-from common.infarastructure.repositories.repository import Repository
+from common.infarastructure.persistance.repository import Repository
 
 
 class CommandCreate(Command):

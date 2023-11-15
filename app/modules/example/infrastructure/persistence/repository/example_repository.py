@@ -1,4 +1,4 @@
-from common.infarastructure.repositories.repository import Repository
+from common.infarastructure.persistance.repository import Repository
 from modules.example.domain.models.example import Example
 from modules.example.infrastructure.persistence.models.example_model import ExampleModel
 
