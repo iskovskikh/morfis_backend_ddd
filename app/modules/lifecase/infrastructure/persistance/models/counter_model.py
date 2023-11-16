@@ -1,7 +1,7 @@
 from django.db import models
 
 from common.infarastructure.persistance.model import BaseModel
-from modules.lifecase.domain.models.counter import Counter
+from modules.lifecase.domain.models.counter import Counter, CounterId
 
 
 class CounterModel(BaseModel):
@@ -21,7 +21,7 @@ class CounterModel(BaseModel):
 
     def to_domain(self):
         return Counter(
-            id=self.id,
+            id=CounterId(self.id),
             title=self.title,
             current_no=self.current_no,
             yearly_current_no=self.yearly_current_no
@@ -35,4 +35,3 @@ class CounterModel(BaseModel):
             current_no=counter.current_no,
             yearly_current_no=counter.yearly_current_no
         )
-

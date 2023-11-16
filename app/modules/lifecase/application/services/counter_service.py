@@ -1,29 +1,24 @@
-from modules.lifecase.domain.models.counter import CounterValue
+from modules.lifecase.domain.models.counter import CounterValue, Counter
 from modules.lifecase.infrastructure.persistance.models.counter_model import CounterModel
 from modules.lifecase.infrastructure.persistance.repository.counter_repository import CounterRepository
 
 
 class CounterService:
-    repository: CounterRepository
-    title: str
+    _repository: CounterRepository
+    _counter_instance: CounterModel
 
-    _counter: CounterModel
+    def __init__(self, title: str = 'default'):
+        self._counter_instance = self._repository.get_or_create_counter_by_title(title)
 
-    def __init__(self, repository: CounterRepository, title: str):
-        self._repository = repository
-        self._counter = get_object_or_create()
+    def current(self) -> CounterValue:
+        counter: Counter = self._counter_instance.to_domain()
+        return counter.current_value()
 
-    def _create_counter(self, title: str):
-        ...
-
-    def _get_counter_by_title(self, title: str):
-        ...
-
-    def current(self, title:str) -> CounterValue:
-        ...
-
-    def next(self, title:str) -> CounterValue:
-        self.repository.get_counter_by_title(title)
+    def next(self) -> CounterValue:
+        counter: Counter = self._counter_instance.to_domain()
+        counter.next()
+        self._counter_instance = self._repository.update(self._counter_instance, counter)
+        return counter.current_value()
 
     def set_current_no(self, title):
         ...

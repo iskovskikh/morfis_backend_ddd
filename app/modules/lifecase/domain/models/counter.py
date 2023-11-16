@@ -1,6 +1,6 @@
 from dataclasses import dataclass, InitVar
 
-from common.domain.models.value_object import ValueObject
+from common.domain.models.value_object import ValueObject, EntityId
 from common.domain.repository import Entity
 from config import cli
 
@@ -16,8 +16,7 @@ class CounterValue(ValueObject):
     day_of_week: int
 
 
-@dataclass(frozen=True)
-class CounterId(ValueObject):
+class CounterId(EntityId):
     pass
 
 
@@ -42,12 +41,24 @@ class Counter(Entity):
     def yearly_current_no(self):
         return self._yearly_current_no
 
-    def next(self) -> CounterValue:
+    def _next_current_no(self):
         self._current_no += 1
-        self._yearly_current_no += 1
-        return self.current()
 
-    def current(self) -> CounterValue:
+    def _new_year_check(self):
+        # todo: проверка на новый год
+        # if new_year:
+        #     self._yearly_current_no = 0
+        pass
+
+    def _next_yearly_current_no(self):
+        self._new_year_check()
+        self._yearly_current_no += 1
+
+    def next(self) -> None:
+        self._next_current_no()
+        self._next_yearly_current_no()
+
+    def current_value(self) -> CounterValue:
         now = cli.now()
         year, week_no, day_of_week = now.isocalendar()
 
