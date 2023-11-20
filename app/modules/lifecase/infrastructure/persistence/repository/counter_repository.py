@@ -1,7 +1,7 @@
-from common.infarastructure.persistance.repository import Repository
-from common.infarastructure.repositories.repository import get_object_or_none
+from common.infarastructure.persistence.repository import Repository
+from common.infarastructure.persistence.utils import get_object_or_none
 from modules.lifecase.domain.models.counter import Counter, CounterId
-from modules.lifecase.infrastructure.persistance.models.counter_model import CounterModel
+from modules.lifecase.infrastructure.persistence.models.counter_model import CounterModel
 
 
 class CounterRepository(Repository):

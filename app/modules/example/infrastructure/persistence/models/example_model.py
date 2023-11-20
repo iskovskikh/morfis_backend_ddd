@@ -1,6 +1,6 @@
 from django.db import models
 
-from common.infarastructure.persistance.model import BaseModel
+from common.infarastructure.persistence.model import BaseModel
 from modules.example.domain.models.example import Status, Example, ExampleId
 
 

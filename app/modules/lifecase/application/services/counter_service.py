@@ -1,10 +1,10 @@
 from modules.lifecase.domain.models.counter import CounterValue, Counter
-from modules.lifecase.infrastructure.persistance.models.counter_model import CounterModel
-from modules.lifecase.infrastructure.persistance.repository.counter_repository import CounterRepository
+from modules.lifecase.infrastructure.persistence.models.counter_model import CounterModel
+from modules.lifecase.infrastructure.persistence.repository.counter_repository import CounterRepository
 
 
 class CounterService:
-    _repository: CounterRepository
+    _repository: CounterRepository = CounterRepository()
     _counter_instance: CounterModel
 
     def __init__(self, title: str = 'default'):

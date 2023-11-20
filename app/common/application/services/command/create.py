@@ -1,5 +1,5 @@
 from common.application.services.command.command import Command
-from common.infarastructure.persistance.repository import Repository
+from common.infarastructure.persistence.repository import Repository
 
 
 class CommandCreate(Command):

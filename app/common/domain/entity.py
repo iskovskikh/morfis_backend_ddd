@@ -1,13 +1,15 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import TypeVar, Generic
 
-from common.domain.models.value_object import GenericUUID
+from common.domain.value_object import EntityId
 
-EntityIdType = TypeVar("EntityIdType", bound=GenericUUID)
+EntityIdType = TypeVar("EntityIdType", bound=EntityId)
 
 
-@dataclass(kw_only=True)
+@dataclass
 class Entity(Generic[EntityIdType]):
+    id: EntityIdType = field(hash=True)
+
     @classmethod
     def next_id(cls) -> EntityIdType:
         return cls.next_id()

@@ -1,26 +1,16 @@
 from dataclasses import dataclass, InitVar
 
-from common.domain.value_object import ValueObject, EntityId
 from common.domain.entity import Entity
+from common.domain.value_object import EntityId
 from config import utils
-
-
-@dataclass(frozen=True)
-class CounterValue(ValueObject):
-    current_no: int
-    yearly_current_no: int
-    year: int
-    month: int
-    day: int
-    week_no: int
-    day_of_week: int
+from modules.registration_number.domain.value_objects import CounterValue
 
 
 class CounterId(EntityId):
     pass
 
-
-@dataclass
+# invariant title Unique
+@dataclass(kw_only=True)
 class Counter(Entity):
     id: CounterId
     title: str
@@ -59,7 +49,7 @@ class Counter(Entity):
         self._next_yearly_current_no()
 
     def current_value(self) -> CounterValue:
-        now = cli.now()
+        now = utils.now()
         year, week_no, day_of_week = now.isocalendar()
 
         result = CounterValue(

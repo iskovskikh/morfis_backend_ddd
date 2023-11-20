@@ -1,6 +1,6 @@
 from django.db import models
 
-from common.infarastructure.persistance.model import BaseModel
+from common.infarastructure.persistence.model import BaseModel
 from modules.lifecase.domain.models.counter import Counter, CounterId
 
 
@@ -19,7 +19,7 @@ class CounterModel(BaseModel):
         verbose_name='Сквозной номер за год'
     )
 
-    def to_domain(self):
+    def to_domain(self) -> Counter:
         return Counter(
             id=CounterId(self.id),
             title=self.title,

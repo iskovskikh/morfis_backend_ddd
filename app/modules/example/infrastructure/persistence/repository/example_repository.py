@@ -1,11 +1,10 @@
-from common.infarastructure.persistance.repository import Repository
+from common.infarastructure.persistence.repository import Repository
 from modules.example.domain.models.example import Example
 from modules.example.infrastructure.persistence.models.example_model import ExampleModel
 
 
 class ExampleRepository(Repository):
     def create(self, example: Example) -> ExampleModel:
-        print(example)
         example_model = ExampleModel.from_domain(example)
         example_model.save(force_insert=True)
         return example_model

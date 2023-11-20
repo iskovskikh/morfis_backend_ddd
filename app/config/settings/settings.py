@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'drf_spectacular_sidecar',
 
-    'modules.example'
+    'modules.example',
+    'modules.lifecase',
+    'modules.registration_number',
 ]
 
 MIDDLEWARE = [
