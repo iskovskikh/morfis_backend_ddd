@@ -8,6 +8,9 @@ class CounterModel(BaseModel):
     title = models.CharField(
         max_length=32,
         unique=True,
+        # validators=[
+        #     UniqueValidator,
+        # ]
         verbose_name='Название счетчика'
     )
 

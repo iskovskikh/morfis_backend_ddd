@@ -12,3 +12,8 @@ class CounterValue(ValueObject):
     day: int
     week_no: int
     day_of_week: int
+
+
+@dataclass(frozen=True)
+class RegistrationNumberValue(ValueObject):
+    number: str
