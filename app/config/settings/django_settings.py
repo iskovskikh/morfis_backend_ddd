@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'modules.example',
     'modules.lifecase',
     'modules.registration_number',
+    'modules.previos_case',
 ]
 
 MIDDLEWARE = [

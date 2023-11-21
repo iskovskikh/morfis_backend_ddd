@@ -1,4 +1,5 @@
-from typing import Any, Type, TypeVar
+from dataclasses import asdict
+from typing import Any, TypeVar, Generic
 
 from common.domain.entity import Entity
 from common.domain.exceptions import EntityNotFoundException
@@ -6,10 +7,12 @@ from common.domain.repository import GenericRepository
 from common.domain.value_object import EntityId
 from common.infarastructure.data_mapper import DataMapper
 from common.infarastructure.persistence.model import BaseModel
-from common.domain.exceptions import EntityNotFoundException
+from django.core.exceptions import ObjectDoesNotExist
+
 
 EntityType = TypeVar('EntityType', bound=Entity)
 EntityIdType = TypeVar('EntityIdType', bound=EntityId)
+ModelClassType = TypeVar('ModelClassType', bound=BaseModel)
 
 
 class InMemoryRepository(GenericRepository[EntityIdType, EntityType]):
@@ -40,33 +43,31 @@ class InMemoryRepository(GenericRepository[EntityIdType, EntityType]):
         return len(self.objects)
 
 
-class DjangoGenericRepository(GenericRepository[EntityId, Entity]):
-    mapper_class: type[DataMapper[Entity, BaseModel]]
-    model_class: type[BaseModel]
+class DjangoGenericRepository(GenericRepository[EntityId, Entity], Generic[ModelClassType]):
+    mapper_class: type[DataMapper[Entity, ModelClassType]]
+    model_class: type[ModelClassType]
 
     def add(self, entity: Entity):
         instance = self.map_entity_to_model(entity)
         instance.save(force_insert=True)
 
     def remove(self, entity: Entity):
-        instance = self.data_mapper.model_class.objects.get(id=entity.id)
+        instance = self.get_model_class().objects.get(id=entity.id)
         instance.delete()
 
     def update(self, entity: EntityType):
-        ...
-        # try:
-        #     instance = self.mapper_class.model_class.objects.get(id=entity.id)
-        # except self.mapper_class.model_class.DoesNotExists:
-        #     raise EntityNotFoundException
-        #
-        # for key, value in # entity!!! # kwargs.items():
-        #     setattr(instance, key, value)
-        # instance.save()
+        try:
+            instance = self.get_model_class().objects.get(id=entity.id)
+        except ObjectDoesNotExist:
+            raise EntityNotFoundException
+        for key, value in asdict(entity).items():
+            setattr(instance, key, value)
+        instance.save()
 
     def get_by_id(self, entity_id: EntityIdType) -> EntityType:
         try:
-            instance = self.data_mapper.model_class.objects.get(id=entity_id)
-        except self.data_mapper.model_class.DoesNotExists:
+            instance = self.get_model_class().objects.get(id=entity_id)
+        except ObjectDoesNotExist:
             raise EntityNotFoundException
 
         return self.map_model_to_entity(instance)

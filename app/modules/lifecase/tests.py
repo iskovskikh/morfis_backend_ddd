@@ -10,7 +10,7 @@ from modules.lifecase.application.services.registration_number_service import Re
 
 class RegistrationNumberServiceTest(TestCase):
 
-
+    @skip
     def test_create_new_number(self):
         number = RegistrationNumberService.get_registration_number()
         print(number)

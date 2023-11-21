@@ -1,4 +1,5 @@
 from dataclasses import dataclass, InitVar
+from typing import Generic, TypeVar
 
 from common.domain.entity import Entity
 from common.domain.value_object import EntityId
@@ -6,8 +7,16 @@ from config import utils
 from modules.registration_number.domain.value_objects import CounterValue
 
 
+class ExampleAggregateId(EntityId):
+    pass
+
+
+ExampleAggregateIdType = TypeVar('ExampleAggregateIdType', bound=ExampleAggregateId)
+
+
 class CounterId(EntityId):
     pass
+
 
 # invariant title Unique
 @dataclass(kw_only=True)
@@ -62,3 +71,24 @@ class Counter(Entity):
             day_of_week=day_of_week
         )
         return result
+
+
+# class PatientDictionaryAggregate(Entity, Generic[PatientDictionaryAggregateIdType]):
+#     id: PatientDictionaryAggregateIdType
+#     first_name: str
+#     last_name: str
+#     ...
+#
+# /// ========
+#
+# # class PatientLifecaseAggregate(Entity, Generic[PatientLifecaseAggregateIdType]):
+# #     id: PatientLifecaseAggregateIdType
+# #     first_name: str
+#
+#
+# @dataclass(kw_only=True)
+# class LifecaseAggregate(Entity, Generic[ExampleAggregateIdType]):
+#     ...
+#     #patient_1: PatientLifecase[Entity]
+#     #patient_2: PatientLifecaseId[EntityId]
+#     patient_3: PatientValueObject[ValueObject]
