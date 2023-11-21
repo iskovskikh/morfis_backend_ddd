@@ -20,21 +20,21 @@ class DataMapper(Generic[MapperEntity, MapperModel], ABC):
         raise NotImplementedError
 
 
-class JSONDataMapper(DataMapper):
-    def model_to_entity(self, instance: MapperModel) -> MapperEntity:
-        entity_id = EntityId(instance.get('id'))
-        entity_dict = {
-            'id': entity_id,
-            **instance['data'],
-        }
-        return self.entity_class(**entity_dict)
-
-    def entity_to_model(self, entity: MapperEntity) -> MapperModel:
-        data = dict(**entity.__dict__)
-        entity_id = str(data.pop('id'))
-        return self.model_class(
-            **{
-                'id': entity_id,
-                'data': data
-            }
-        )
+# class JSONDataMapper(DataMapper):
+#     def model_to_entity(self, instance: MapperModel) -> MapperEntity:
+#         entity_id = EntityId(instance.get('id'))
+#         entity_dict = {
+#             'id': entity_id,
+#             **instance['data'],
+#         }
+#         return self.entity_class(**entity_dict)
+#
+#     def entity_to_model(self, entity: MapperEntity) -> MapperModel:
+#         data = dict(**entity.__dict__)
+#         entity_id = str(data.pop('id'))
+#         return self.model_class(
+#             **{
+#                 'id': entity_id,
+#                 'data': data
+#             }
+#         )

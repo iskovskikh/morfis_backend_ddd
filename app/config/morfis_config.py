@@ -6,6 +6,6 @@ MORFIS = {
         'REGISTRATION_NUMBER_LIFETIME': timedelta(seconds=60),
 
         # шаблон генерации нового регистрационного номера
-        'REGISTRATION_NUMBER_TEMPLATE': '123 заполнить REGISTRATION_NUMBER_TEMPLATE!',
+        'REGISTRATION_NUMBER_TEMPLATE': '{current_no} REGISTRATION_NUMBER_TEMPLATE!',
     }
 }
