@@ -1,7 +1,6 @@
 from django.db import models
 
 from common.infarastructure.persistence.model import BaseModel
-from modules.lifecase.domain.models.counter import Counter, CounterId
 
 
 class CounterModel(BaseModel):
