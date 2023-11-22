@@ -30,7 +30,7 @@ class DjangoCounterRepository(CounterRepository, DjangoGenericRepository):
     mapper_class = DjangoCounterDataMapper
     model_class = CounterModel
 
-    def get_or_create_by_title(self, title: str) -> Counter:
+    def get_or_create_by_title(self, title: str):
         try:
             instance = self.get_model_class().objects.get(title=title)
             counter = self.map_model_to_entity(instance)

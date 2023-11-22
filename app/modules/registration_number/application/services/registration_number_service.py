@@ -1,4 +1,3 @@
-from dataclasses import asdict
 from datetime import datetime, timedelta
 from typing import TypeVar
 
@@ -7,7 +6,7 @@ from config import morfis_config
 from config.utils import now
 from modules.registration_number.application.services.counter_service import CounterService
 from modules.registration_number.domain.entities import RegistrationNumber, RegistrationNumberId
-from modules.registration_number.domain.repositories import RegistrationNumberRepository, CounterRepository
+from modules.registration_number.domain.repositories import RegistrationNumberRepository
 from modules.registration_number.domain.value_objects import RegistrationNumberValue, CounterValue
 from modules.registration_number.infrastructure.repositories.counter_repository import DjangoCounterRepository
 
@@ -35,7 +34,7 @@ class RegistrationNumberService(GenericService):
 
         return number
 
-    def _geberate_new_number(self) -> RegistrationNumberValue:
+    def _generate_new_number(self) -> RegistrationNumberValue:
         counter_repo = DjangoCounterRepository()
         counter = CounterService('title', repository=counter_repo)
         counter_value: CounterValue = counter.next()
@@ -51,7 +50,7 @@ class RegistrationNumberService(GenericService):
         if registration_number is None:
             registration_number = RegistrationNumber(
                 id=RegistrationNumberId.next_id(),
-                number=self._geberate_new_number(),
+                number=self._generate_new_number(),
                 rent_expires_at_timestamp=RegistrationNumberService._calc_rent_timestamp()
             )
             self._repository.add(registration_number)

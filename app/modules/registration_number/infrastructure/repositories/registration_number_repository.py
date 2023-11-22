@@ -29,7 +29,7 @@ class DjangoRegistrationNumberRepository(RegistrationNumberRepository, DjangoGen
     mapper_class = RegistrationNumberDataMapper
     model_class = RegistrationNumberModel
 
-    def get_expired_number(self) -> RegistrationNumber | None:
+    def get_expired_number(self):
         instance = self.get_model_class().objects \
             .filter(rent_expires_at_timestamp__lt=now()) \
             .order_by('-rent_expires_at_timestamp') \
