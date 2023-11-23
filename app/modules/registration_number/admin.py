@@ -12,7 +12,6 @@ class CounterModelAdmin(admin.ModelAdmin):
     pass
 
 
-
 @admin.register(RegistrationNumberModel)
 class RegistrationNumberModelAdmin(admin.ModelAdmin):
     pass

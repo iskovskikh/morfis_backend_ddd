@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from modules.example.infrastructure.api.rest.v1.urls import urlpatterns as example_urls
+from modules.registration_number.infrastructure.api.urls import urlpatterns as registration_number_urls
 
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
@@ -25,6 +26,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(example_urls)),
+    path('', include(registration_number_urls)),
 
     path('api/v2/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/v2/docs/swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),

@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 
 from common.domain.repository import GenericRepository
-from modules.registration_number.domain.entities import CounterId, Counter, RegistrationNumber, RegistrationNumberId
+from modules.registration_number.domain.entities import Counter, RegistrationNumber
+from modules.registration_number.domain.value_objects import CounterId, RegistrationNumberId
 
 
 class CounterRepository(GenericRepository[CounterId, Counter], ABC):

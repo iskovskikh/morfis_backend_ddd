@@ -1,6 +1,7 @@
 from common.infarastructure.data_mapper import DataMapper
 from common.infarastructure.repository import DjangoGenericRepository
-from modules.registration_number.domain.entities import Counter, CounterId
+from modules.registration_number.domain.entities import Counter
+from modules.registration_number.domain.value_objects import CounterId
 from modules.registration_number.domain.repositories import CounterRepository
 from modules.registration_number.infrastructure.models.counter_model import CounterModel
 from common.domain.exceptions import EntityNotFoundException

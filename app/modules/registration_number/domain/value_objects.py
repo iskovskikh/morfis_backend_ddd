@@ -1,6 +1,8 @@
 from dataclasses import dataclass
+from typing import ClassVar
 
-from common.domain.value_object import ValueObject
+from common.domain.value_object import ValueObject, EntityId
+from config import morfis_config
 
 
 @dataclass(frozen=True)
@@ -16,4 +18,27 @@ class CounterValue(ValueObject):
 
 @dataclass(frozen=True)
 class RegistrationNumberValue(ValueObject):
-    number: str
+    _template: ClassVar[str] = morfis_config.MORFIS['REGISTRATION_NUMBER']['REGISTRATION_NUMBER_TEMPLATE']
+
+    value: str
+
+    @classmethod
+    def format(cls, counter_value: CounterValue) -> 'RegistrationNumberValue':
+        number = cls._template.format(
+            current_no=counter_value.current_no,
+            yearly_current_no=counter_value.yearly_current_no,
+            day=counter_value.day,
+            month=counter_value.month,
+            year=counter_value.year,
+            day_of_week=counter_value.day_of_week,
+            week_no=counter_value.week_no,
+        )
+        return RegistrationNumberValue(number)
+
+
+class CounterId(EntityId):
+    pass
+
+
+class RegistrationNumberId(EntityId):
+    pass
