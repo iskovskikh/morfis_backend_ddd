@@ -2,7 +2,7 @@ from dataclasses import dataclass, InitVar
 from datetime import datetime, timedelta
 from typing import Generic, TypeVar, ClassVar
 
-from common.domain.entity import Entity
+from common.domain.entities import Entity
 from config import morfis_config
 from config.utils import now
 from modules.registration_number.domain.value_objects import CounterValue, RegistrationNumberValue, CounterId, \

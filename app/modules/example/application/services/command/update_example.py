@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
-from common.application.services.command.update import CommandUpdate
-from modules.example.infrastructure.persistence.repository.example_repository import ExampleRepository
-from modules.example.infrastructure.persistence.models.example_model import ExampleModel
-from modules.example.domain.models.example import Example
+from common.application.services.commands.update import CommandUpdate
+from modules.example.infrastructure.repositories.example_repository import ExampleRepository
+from modules.example.infrastructure.models.example_model import ExampleModel
+from modules.example.domain.entities.example import Example
 
 
 @dataclass

@@ -1,7 +1,7 @@
 from abc import abstractmethod, ABC
 from typing import Generic, TypeVar, Any
 
-from common.domain.entity import Entity, EntityId
+from common.domain.entities import Entity, EntityId
 
 MapperEntity = TypeVar('MapperEntity', bound=Entity)
 MapperModel = TypeVar('MapperModel', bound=Any)

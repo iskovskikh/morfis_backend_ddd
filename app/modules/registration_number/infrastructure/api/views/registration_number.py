@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework import views, status
 from rest_framework.response import Response
 
-from modules.registration_number.application.use_case.command import RegistrationNumberCommandUseCase
+from modules.registration_number.application.use_case.commands import RegistrationNumberCommandUseCase
 
 
 @extend_schema(tags=["lifecase"])

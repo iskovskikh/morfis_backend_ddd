@@ -1,6 +1,6 @@
 from django.db import models
 
-from common.infarastructure.persistence.model import BaseModel
+from common.infarastructure.models import BaseModel
 
 
 class RegistrationNumberModel(BaseModel):

@@ -31,3 +31,6 @@ class RegistrationNumberCommandUseCase:
 
     def invalidate_registration_number(self):
         ...
+
+    def register_new_lifecase_with_this_number(self):
+        ...

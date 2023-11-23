@@ -1,7 +1,7 @@
 from django.db import models
 
-from common.infarastructure.persistence.model import BaseModel
-from modules.example.domain.models.example import Status, Example, ExampleId
+from common.infarastructure.models import BaseModel
+from modules.example.domain.entities.example import Status, Example, ExampleId
 
 
 class ExampleModel(BaseModel):

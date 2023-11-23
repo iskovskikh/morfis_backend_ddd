@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from modules.registration_number.application.services.counter_service import CounterService
 from modules.registration_number.application.services.registration_number_service import RegistrationNumberService
-from modules.registration_number.application.use_case.command import RegistrationNumberCommandUseCase
+from modules.registration_number.application.use_case.commands import RegistrationNumberCommandUseCase
 from modules.registration_number.domain.entities import RegistrationNumber
 from modules.registration_number.domain.value_objects import CounterValue, RegistrationNumberValue
 from modules.registration_number.infrastructure.repositories.counter_repository import DjangoCounterRepository
@@ -29,10 +29,8 @@ class RegistrationNumberServiceTest(TestCase):
     def test_registration_number_generator(self):
         registration_number_use_case = RegistrationNumberCommandUseCase()
         data1 = registration_number_use_case.get_registration_number()
-        print(data1)
+        # print(data1)
         self.assertIsInstance(data1, RegistrationNumber)
         data2 = registration_number_use_case.get_registration_number()
-        print(data2)
+        # print(data2)
         self.assertIsInstance(data2, RegistrationNumber)
-        data3 = registration_number_use_case.get_registration_number()
-        print(data3)

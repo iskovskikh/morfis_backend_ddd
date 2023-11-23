@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from typing import TypeVar
 
-from common.application.services.service import GenericService
+from common.application.services.services import GenericService
 from config import morfis_config
 from config.utils import now
 from modules.registration_number.application.services.counter_service import CounterService

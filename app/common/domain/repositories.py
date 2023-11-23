@@ -1,8 +1,8 @@
 from abc import ABCMeta, abstractmethod
 from typing import Generic, TypeVar, Type
 
-from common.domain.entity import Entity
-from common.domain.value_object import EntityId
+from common.domain.entities import Entity
+from common.domain.value_objects import EntityId
 
 EntityType = TypeVar('EntityType', bound=Entity)
 EntityIdType = TypeVar('EntityIdType', bound=EntityId)

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import ClassVar
 
-from common.domain.value_object import ValueObject, EntityId
+from common.domain.value_objects import ValueObject, EntityId
 from config import morfis_config
 
 

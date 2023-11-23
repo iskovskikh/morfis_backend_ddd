@@ -1,8 +1,8 @@
 from dataclasses import dataclass, InitVar, field
 from enum import Enum
 
-from common.domain.entity import AggregateRoot
-from common.domain.value_object import EntityId
+from common.domain.entities import AggregateRoot
+from common.domain.value_objects import EntityId
 
 
 # class MyIntEnum(Enum):

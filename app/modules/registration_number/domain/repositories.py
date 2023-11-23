@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from common.domain.repository import GenericRepository
+from common.domain.repositories import GenericRepository
 from modules.registration_number.domain.entities import Counter, RegistrationNumber
 from modules.registration_number.domain.value_objects import CounterId, RegistrationNumberId
 

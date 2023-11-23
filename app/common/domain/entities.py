@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import TypeVar, Generic
 
-from common.domain.value_object import EntityId
+from common.domain.value_objects import EntityId
 
 EntityIdType = TypeVar("EntityIdType", bound=EntityId)
 

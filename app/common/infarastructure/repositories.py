@@ -1,12 +1,12 @@
 from dataclasses import asdict
 from typing import Any, TypeVar, Generic
 
-from common.domain.entity import Entity
+from common.domain.entities import Entity
 from common.domain.exceptions import EntityNotFoundException
-from common.domain.repository import GenericRepository
-from common.domain.value_object import EntityId
-from common.infarastructure.data_mapper import DataMapper
-from common.infarastructure.persistence.model import BaseModel
+from common.domain.repositories import GenericRepository
+from common.domain.value_objects import EntityId
+from common.infarastructure.data_mappers import DataMapper
+from common.infarastructure.models import BaseModel
 from django.core.exceptions import ObjectDoesNotExist
 
 

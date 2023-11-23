@@ -1,5 +1,5 @@
-from common.infarastructure.data_mapper import DataMapper
-from common.infarastructure.repository import DjangoGenericRepository
+from common.infarastructure.data_mappers import DataMapper
+from common.infarastructure.repositories import DjangoGenericRepository
 from modules.registration_number.domain.entities import Counter
 from modules.registration_number.domain.value_objects import CounterId
 from modules.registration_number.domain.repositories import CounterRepository
