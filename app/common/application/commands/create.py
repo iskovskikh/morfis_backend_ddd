@@ -1,6 +1,6 @@
 from typing import Any
 
-from common.application.services.commands.command import Command
+from common.application.commands.command import Command
 
 
 class CommandCreate(Command):

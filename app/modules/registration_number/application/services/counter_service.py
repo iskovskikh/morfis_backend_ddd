@@ -8,8 +8,8 @@ RepositoryType = TypeVar('RepositoryType', bound=CounterRepository)
 
 
 class CounterService:
-    _repository: RepositoryType
     _title: str
+    _repository: RepositoryType
 
     def __init__(self, title: str, repository: RepositoryType):
         self._title = title

@@ -3,7 +3,8 @@ from rest_framework import serializers
 from rest_framework import views, status
 from rest_framework.response import Response
 
-from modules.registration_number.application.use_case.commands import RegistrationNumberCommandUseCase
+from modules.registration_number.application.services.registration_number_service import \
+    RegistrationNumberService
 
 
 @extend_schema(tags=["lifecase"])
@@ -20,7 +21,7 @@ class RegistrationNumberRequestApi(views.APIView):
         responses={201: RegistrationNumberRequestSerializer}
     )
     def put(self, request):
-        registration_number_use_case = RegistrationNumberCommandUseCase()
+        registration_number_use_case = RegistrationNumberService()
         registration_number = registration_number_use_case.get_registration_number()
         serializer = self.RegistrationNumberRequestSerializer(registration_number)
         return Response(data=serializer.data, status=status.HTTP_201_CREATED)
