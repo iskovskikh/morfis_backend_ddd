@@ -9,6 +9,8 @@ from modules.registration_number.application.services.registration_number_servic
 
 @extend_schema(tags=["lifecase"])
 class RegistrationNumberRequestApi(views.APIView):
+    registration_number_service = RegistrationNumberService()
+
     class RegistrationNumberRequestSerializer(serializers.Serializer):
         id = serializers.UUIDField()
         number = serializers.CharField(source='number.value')
@@ -21,7 +23,6 @@ class RegistrationNumberRequestApi(views.APIView):
         responses={201: RegistrationNumberRequestSerializer}
     )
     def put(self, request):
-        registration_number_use_case = RegistrationNumberService()
-        registration_number = registration_number_use_case.get_registration_number()
+        registration_number = self.registration_number_service.get_registration_number()
         serializer = self.RegistrationNumberRequestSerializer(registration_number)
         return Response(data=serializer.data, status=status.HTTP_201_CREATED)

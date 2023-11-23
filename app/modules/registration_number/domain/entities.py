@@ -74,6 +74,14 @@ class RegistrationNumber(Entity, Generic[RegistrationNumberIdType]):
     number: RegistrationNumberValue
     rent_expires_at_timestamp: datetime
 
+    @staticmethod
+    def factory( counter_value: CounterValue) -> 'RegistrationNumber':
+        return RegistrationNumber(
+            id=RegistrationNumberId.next_id(),
+            number=RegistrationNumberValue.format(counter_value),
+            rent_expires_at_timestamp=RegistrationNumber.calc_rent_timestamp()
+        )
+
     @classmethod
     def calc_rent_timestamp(cls) -> datetime:
         return now() + cls.lifetime
