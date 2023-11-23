@@ -5,7 +5,7 @@ from modules.registration_number.domain.entities import Counter, RegistrationNum
 from modules.registration_number.domain.value_objects import CounterId, RegistrationNumberId
 
 
-class CounterRepository(GenericRepository[CounterId, Counter], ABC):
+class CounterRepositoryInterface(GenericRepository[CounterId, Counter], ABC):
     """RegistrationNumberRepository iface"""
 
     @abstractmethod
@@ -13,7 +13,7 @@ class CounterRepository(GenericRepository[CounterId, Counter], ABC):
         raise NotImplementedError
 
 
-class RegistrationNumberRepository(GenericRepository[RegistrationNumberId, RegistrationNumber], ABC):
+class RegistrationNumberRepositoryInterface(GenericRepository[RegistrationNumberId, RegistrationNumber], ABC):
     """RegistrationNumberRepository iface"""
 
     def get_expired_number(self) -> RegistrationNumber | None:

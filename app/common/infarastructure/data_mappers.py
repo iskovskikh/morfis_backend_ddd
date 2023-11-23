@@ -7,7 +7,7 @@ MapperEntity = TypeVar('MapperEntity', bound=Entity)
 MapperModel = TypeVar('MapperModel', bound=Any)
 
 
-class DataMapper(Generic[MapperEntity, MapperModel], ABC):
+class DataMapperInterface(Generic[MapperEntity, MapperModel], ABC):
     entity_class = type(MapperEntity)
     model_class = type(MapperModel)
 

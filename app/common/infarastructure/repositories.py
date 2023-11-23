@@ -5,7 +5,7 @@ from common.domain.entities import Entity
 from common.domain.exceptions import EntityNotFoundException
 from common.domain.repositories import GenericRepository
 from common.domain.value_objects import EntityId
-from common.infarastructure.data_mappers import DataMapper
+from common.infarastructure.data_mappers import DataMapperInterface
 from common.infarastructure.models import BaseModel
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -44,7 +44,7 @@ class InMemoryRepository(GenericRepository[EntityIdType, EntityType]):
 
 
 class DjangoGenericRepository(GenericRepository[EntityId, Entity], Generic[ModelClassType]):
-    mapper_class: type[DataMapper[Entity, ModelClassType]]
+    mapper_class: type[DataMapperInterface[Entity, ModelClassType]]
     model_class: type[ModelClassType]
 
     def add(self, entity: Entity):
@@ -54,15 +54,15 @@ class DjangoGenericRepository(GenericRepository[EntityId, Entity], Generic[Model
     def remove(self, entity: Entity):
         instance = self.get_model_class().objects.get(id=entity.id)
         instance.delete()
-
-    def update(self, entity: EntityType):
-        try:
-            instance = self.get_model_class().objects.get(id=entity.id)
-        except ObjectDoesNotExist:
-            raise EntityNotFoundException
-        for key, value in asdict(entity).items():
-            setattr(instance, key, value)
-        instance.save()
+    
+    # def update(self, entity: EntityType):
+    #     try:
+    #         instance = self.get_model_class().objects.get(id=entity.id)
+    #     except ObjectDoesNotExist:
+    #         raise EntityNotFoundException
+    #     for key, value in asdict(entity).items():
+    #         setattr(instance, key, value)
+    #     instance.save()
 
     def get_by_id(self, entity_id: EntityIdType) -> EntityType:
         try:

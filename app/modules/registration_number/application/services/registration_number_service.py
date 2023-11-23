@@ -6,17 +6,17 @@ from config import morfis_config
 from config.utils import now
 from modules.registration_number.application.services.counter_service import CounterService
 from modules.registration_number.domain.entities import RegistrationNumber
-from modules.registration_number.domain.repositories import RegistrationNumberRepository
+from modules.registration_number.domain.repositories import RegistrationNumberRepositoryInterface
 from modules.registration_number.domain.value_objects import RegistrationNumberValue
 from modules.registration_number.infrastructure.repositories.counter_repository import DjangoCounterRepository
 from modules.registration_number.infrastructure.repositories.registration_number_repository import \
     DjangoRegistrationNumberRepository
 
-RepositoryType = TypeVar('RepositoryType', bound=RegistrationNumberRepository)
+RepositoryType = TypeVar('RepositoryType', bound=RegistrationNumberRepositoryInterface)
 
 
 class RegistrationNumberService(Service):
-    registration_number_repo: RegistrationNumberRepository = DjangoRegistrationNumberRepository()
+    registration_number_repo: RegistrationNumberRepositoryInterface = DjangoRegistrationNumberRepository()
     counter_service: CounterService = CounterService(title='lifecase_counter', repository=DjangoCounterRepository())
 
     def get_registration_number(self) -> RegistrationNumber:

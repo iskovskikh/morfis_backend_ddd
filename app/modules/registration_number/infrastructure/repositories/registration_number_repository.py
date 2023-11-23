@@ -1,14 +1,15 @@
 from common.domain.exceptions import EntityNotFoundException
-from common.infarastructure.data_mappers import DataMapper
+from common.infarastructure.data_mappers import DataMapperInterface
 from common.infarastructure.repositories import DjangoGenericRepository
 from config.utils import now
 from modules.registration_number.domain.entities import RegistrationNumber
-from modules.registration_number.domain.repositories import RegistrationNumberRepository
+from modules.registration_number.domain.repositories import RegistrationNumberRepositoryInterface
 from modules.registration_number.domain.value_objects import RegistrationNumberValue
 from modules.registration_number.infrastructure.models.registration_number_model import RegistrationNumberModel
 from django.core.exceptions import ObjectDoesNotExist
 
-class RegistrationNumberDataMapper(DataMapper[RegistrationNumber, RegistrationNumberModel]):
+
+class RegistrationNumberDataMapper(DataMapperInterface[RegistrationNumber, RegistrationNumberModel]):
     def entity_to_model(self, entity):
         return RegistrationNumberModel(
             id=entity.id,
@@ -24,7 +25,7 @@ class RegistrationNumberDataMapper(DataMapper[RegistrationNumber, RegistrationNu
         )
 
 
-class DjangoRegistrationNumberRepository(RegistrationNumberRepository, DjangoGenericRepository):
+class DjangoRegistrationNumberRepository(RegistrationNumberRepositoryInterface, DjangoGenericRepository):
     mapper_class = RegistrationNumberDataMapper
     model_class = RegistrationNumberModel
 

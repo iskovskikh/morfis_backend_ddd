@@ -1,10 +1,10 @@
 from typing import TypeVar
 
 from modules.registration_number.domain.entities import Counter
-from modules.registration_number.domain.repositories import CounterRepository
+from modules.registration_number.domain.repositories import CounterRepositoryInterface
 from modules.registration_number.domain.value_objects import CounterValue
 
-RepositoryType = TypeVar('RepositoryType', bound=CounterRepository)
+RepositoryType = TypeVar('RepositoryType', bound=CounterRepositoryInterface)
 
 
 class CounterService:

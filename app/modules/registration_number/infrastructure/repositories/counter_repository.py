@@ -1,14 +1,14 @@
-from common.infarastructure.data_mappers import DataMapper
+from common.infarastructure.data_mappers import DataMapperInterface
 from common.infarastructure.repositories import DjangoGenericRepository
 from modules.registration_number.domain.entities import Counter
 from modules.registration_number.domain.value_objects import CounterId
-from modules.registration_number.domain.repositories import CounterRepository
+from modules.registration_number.domain.repositories import CounterRepositoryInterface
 from modules.registration_number.infrastructure.models.counter_model import CounterModel
 from common.domain.exceptions import EntityNotFoundException
 from django.core.exceptions import ObjectDoesNotExist
 
 
-class DjangoCounterDataMapper(DataMapper[Counter, CounterModel]):
+class DjangoCounterDataMapper(DataMapperInterface[Counter, CounterModel]):
 
     def model_to_entity(self, instance: CounterModel) -> Counter:
         return Counter(
@@ -27,7 +27,7 @@ class DjangoCounterDataMapper(DataMapper[Counter, CounterModel]):
         )
 
 
-class DjangoCounterRepository(CounterRepository, DjangoGenericRepository):
+class DjangoCounterRepository(CounterRepositoryInterface, DjangoGenericRepository):
     mapper_class = DjangoCounterDataMapper
     model_class = CounterModel
 
