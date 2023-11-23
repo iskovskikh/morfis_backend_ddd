@@ -4,14 +4,12 @@ from modules.registration_number.application.services.counter_service import Cou
 from modules.registration_number.application.services.registration_number_service import RegistrationNumberService
 from modules.registration_number.domain.entities import RegistrationNumber
 from modules.registration_number.domain.value_objects import CounterValue
-from modules.registration_number.infrastructure.repositories.counter_repository import DjangoCounterRepository
 
 
 class CounterServiceTest(TestCase):
 
     def test_create_counter(self):
-        counter_repo = DjangoCounterRepository()
-        counter_service = CounterService(title='default', repository=counter_repo)
+        counter_service = CounterService()
         data1 = counter_service.next()
         # print(data1)
         self.assertIsInstance(data1, CounterValue)

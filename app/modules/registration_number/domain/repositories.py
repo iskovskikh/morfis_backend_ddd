@@ -18,3 +18,6 @@ class RegistrationNumberRepositoryInterface(GenericRepository[RegistrationNumber
 
     def get_expired_number(self) -> RegistrationNumber | None:
         raise NotImplementedError
+
+    def update(self, entity: RegistrationNumber) -> None:
+        raise NotImplementedError

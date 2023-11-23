@@ -54,7 +54,7 @@ class DjangoGenericRepository(GenericRepository[EntityId, Entity], Generic[Model
     def remove(self, entity: Entity):
         instance = self.get_model_class().objects.get(id=entity.id)
         instance.delete()
-    
+
     # def update(self, entity: EntityType):
     #     try:
     #         instance = self.get_model_class().objects.get(id=entity.id)
