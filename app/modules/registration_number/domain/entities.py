@@ -70,18 +70,21 @@ RegistrationNumberIdType = TypeVar('RegistrationNumberIdType', bound=Registratio
 @dataclass(kw_only=True)
 class RegistrationNumber(Entity, Generic[RegistrationNumberIdType]):
     lifetime: ClassVar[timedelta] = morfis_config.MORFIS['REGISTRATION_NUMBER']['REGISTRATION_NUMBER_LIFETIME']
-
     number: RegistrationNumberValue
     rent_expires_at_timestamp: datetime
 
     @staticmethod
-    def factory( counter_value: CounterValue) -> 'RegistrationNumber':
+    def factory(counter_value: CounterValue) -> 'RegistrationNumber':
         return RegistrationNumber(
             id=RegistrationNumberId.next_id(),
             number=RegistrationNumberValue.format(counter_value),
-            rent_expires_at_timestamp=RegistrationNumber.calc_rent_timestamp()
+            rent_expires_at_timestamp=RegistrationNumber.calc_extended_timestamp()
         )
 
     @classmethod
-    def calc_rent_timestamp(cls) -> datetime:
+    def calc_extended_timestamp(cls) -> datetime:
         return now() + cls.lifetime
+
+    @classmethod
+    def calc_invalidated_timestamp(cls) -> datetime:
+        return now()

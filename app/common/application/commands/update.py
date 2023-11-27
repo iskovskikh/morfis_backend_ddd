@@ -1,4 +1,4 @@
-from common.application.commands.command import Command
+from common.application.command.command import Command
 
 
 class CommandUpdate(Command):

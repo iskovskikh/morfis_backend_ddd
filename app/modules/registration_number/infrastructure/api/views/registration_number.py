@@ -4,12 +4,12 @@ from rest_framework import views, status
 from rest_framework.response import Response
 
 from modules.registration_number.application.services.registration_number_service import \
-    RegistrationNumberService
+    DjangoRegistrationNumberService
 
 
 @extend_schema(tags=["lifecase"])
 class RegistrationNumberRequestApi(views.APIView):
-    registration_number_service = RegistrationNumberService()
+    registration_number_service = DjangoRegistrationNumberService()
 
     class RegistrationNumberRequestSerializer(serializers.Serializer):
         id = serializers.UUIDField()

@@ -21,3 +21,6 @@ class RegistrationNumberRepositoryInterface(GenericRepository[RegistrationNumber
 
     def update(self, entity: RegistrationNumber) -> None:
         raise NotImplementedError
+
+    # def remove(self, entity: RegistrationNumber) -> None:
+    #     raise NotImplementedError

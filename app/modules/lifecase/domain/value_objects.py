@@ -10,8 +10,8 @@ class LifeCaseId(EntityId):
 
 @dataclass(frozen=True)
 class RegistrationNumberVO(ValueObject):
-    pass
-
+    value: str
+    
 
 @dataclass(frozen=True)
 class PatientVO(ValueObject):

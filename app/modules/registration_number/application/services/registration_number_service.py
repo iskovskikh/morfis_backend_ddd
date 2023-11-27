@@ -4,6 +4,6 @@ from modules.registration_number.infrastructure.repositories.registration_number
     DjangoRegistrationNumberRepository
 
 
-class RegistrationNumberService(RegistrationNumberServiceInterface):
+class DjangoRegistrationNumberService(RegistrationNumberServiceInterface):
     registration_number_repo = DjangoRegistrationNumberRepository()
     counter_service = CounterService()

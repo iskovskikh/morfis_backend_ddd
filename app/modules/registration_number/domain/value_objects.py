@@ -22,6 +22,9 @@ class RegistrationNumberValue(ValueObject):
 
     value: str
 
+    def __str__(self):
+        return self.value
+
     @classmethod
     def format(cls, counter_value: CounterValue) -> 'RegistrationNumberValue':
         number = cls._template.format(
